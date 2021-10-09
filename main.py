@@ -9,12 +9,12 @@ import sqlite3
 
 DATABASE_LOCATION = "sqlite://my_played_tracks.sqlite"
 USER_ID = "creedsonchris"
-TOKEN = "BQAWVPSRXLQ7rUussdT80XCEHkgPNjZRWZM8QLtQ8aFlQmU6UZ694GkDne6pqTRukYQ5cchusXm9NnlBBEsT4YUVZmLTE9Skeurzay12mtrUiSIc4JqMUl2rkzBj0bxchYSm2GN9PkpkKiSFWm_l"
+TOKEN = "BQBDWaL6ANN6SLJLKGi_e5yeSSHoXadgXYR4iBPMjZkKpjD8yDOumo-bvkGok6Ocezte2DVM3GL4xqiT4wlm8m2sN7ozXVRhoHyJQqlQGuGE8FA1r26Ft7HopXCbZYnw8U2YJWqqyeRp25Rpqb2T"
 
 
 def check_if_valid_data(df: pd.DataFrame) -> bool:
     # Check if dataframe is empty
-    if df.empty():
+    if df.empty:
         print("No songs downloaded. Finishing execution")
         return False
 
