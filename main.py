@@ -11,6 +11,36 @@ DATABASE_LOCATION = "sqlite://my_played_tracks.sqlite"
 USER_ID = "creedsonchris"
 TOKEN = "BQAWVPSRXLQ7rUussdT80XCEHkgPNjZRWZM8QLtQ8aFlQmU6UZ694GkDne6pqTRukYQ5cchusXm9NnlBBEsT4YUVZmLTE9Skeurzay12mtrUiSIc4JqMUl2rkzBj0bxchYSm2GN9PkpkKiSFWm_l"
 
+
+def check_if_valid_data(df: pd.DataFrame) -> bool:
+    # Check if dataframe is empty
+    if df.empty():
+        print("No songs downloaded. Finishing execution")
+        return False
+
+    # Primary check
+    if pd.Series(df['played_at']).is_unique:
+        pass
+    else:
+        raise Exception("Primary Key Check is violated")
+
+    # Check for nulls
+    if df.isnull().values.any():
+        raise Exception("Null valued found")
+
+    # Check all timestamps are of yesterday's date
+    yesterday = datetime.datetime.now() - datetime.timedelta(days=1)
+    yesterday = yesterday.replace(hour=0, minute=0, second=0, microsecond=0)
+
+    timestamps = df["timestamp"].tolist()
+    for timestamp in timestamps:
+        if datetime.datetime.strptime(timestamp, "%Y-%m-%d") != yesterday:
+            raise Exception("At least one of the returned songs does not from"
+                            "the last 24 hours")
+
+    return True
+
+
 if __name__ == "__main__":
 
     headers = {
@@ -38,7 +68,7 @@ if __name__ == "__main__":
         song_names.append(song["track"]["name"])
         artist_names.append(song["track"]["album"]["artists"][0]["name"])
         played_at_list.append(song["played_at"])
-        timestamps.append(song["played_at"][0:10])
+        timestamps.append(song["played_at"])
 
     song_dict = {
         "song_name": song_names,
@@ -49,4 +79,8 @@ if __name__ == "__main__":
 
     song_df = pd.DataFrame(song_dict)
 
-    print(song_df)
+    print(song_df.to_string())
+
+    # Validate
+    if check_if_valid_data(song_df):
+        print("Data valid, proceed to load stage")
