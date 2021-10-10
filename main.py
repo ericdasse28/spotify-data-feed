@@ -7,7 +7,7 @@ from datetime import datetime
 import datetime
 import sqlite3
 
-DATABASE_LOCATION = "sqlite://my_played_tracks.sqlite"
+DATABASE_LOCATION = "sqlite:///my_played_tracks.sqlite"
 USER_ID = "creedsonchris"
 TOKEN = "BQBpgtk3fx-DaNoDT4uSCDJKJ7k5TVsP8OMT9_5Q3LJc-ppNT54u5Ua_U7ffR2I8wb_JgWWL1OEKWaWkNFCIdlAUZ1LW_frG_XSdx1pJzI9UNZigiNJlZINLateeaFCPX24fgYMbBXFfOOL7_JY3"
 
@@ -84,3 +84,30 @@ if __name__ == "__main__":
     # Validate
     if check_if_valid_data(song_df):
         print("Data valid, proceed to load stage")
+
+    # Load
+    engine = sqlalchemy.create_engine(DATABASE_LOCATION)
+    conn = sqlite3.connect('my_played_at_tracks.sqlite')
+    cursor = conn.cursor()
+
+    sql_query = """
+    CREATE TABLE IF NOT EXISTS my_played_tracks (
+        song_name VARCHAR(200),
+        artist_name VARCHAR(200),
+        played_at VARCHAR(200),
+        timestamp VARCHAR(200),
+        CONSTRAINT primary_key_constraint PRIMARY KEY (played_at)
+    )
+    """
+
+    cursor.execute(sql_query)
+    print("Opened database successfully")
+
+    try:
+        song_df.to_sql("my_played_at_tracks", engine, index=False,
+                       if_exists='append')
+    except:
+        print("Data already exists in the database")
+
+    conn.close()
+    print("Close database successfully")
