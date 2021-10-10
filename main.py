@@ -9,7 +9,7 @@ import sqlite3
 
 DATABASE_LOCATION = "sqlite://my_played_tracks.sqlite"
 USER_ID = "creedsonchris"
-TOKEN = "BQBDWaL6ANN6SLJLKGi_e5yeSSHoXadgXYR4iBPMjZkKpjD8yDOumo-bvkGok6Ocezte2DVM3GL4xqiT4wlm8m2sN7ozXVRhoHyJQqlQGuGE8FA1r26Ft7HopXCbZYnw8U2YJWqqyeRp25Rpqb2T"
+TOKEN = "BQBpgtk3fx-DaNoDT4uSCDJKJ7k5TVsP8OMT9_5Q3LJc-ppNT54u5Ua_U7ffR2I8wb_JgWWL1OEKWaWkNFCIdlAUZ1LW_frG_XSdx1pJzI9UNZigiNJlZINLateeaFCPX24fgYMbBXFfOOL7_JY3"
 
 
 def check_if_valid_data(df: pd.DataFrame) -> bool:
@@ -68,7 +68,7 @@ if __name__ == "__main__":
         song_names.append(song["track"]["name"])
         artist_names.append(song["track"]["album"]["artists"][0]["name"])
         played_at_list.append(song["played_at"])
-        timestamps.append(song["played_at"])
+        timestamps.append(song["played_at"][:10])
 
     song_dict = {
         "song_name": song_names,
