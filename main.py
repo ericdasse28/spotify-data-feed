@@ -29,13 +29,13 @@ def check_if_valid_data(df: pd.DataFrame) -> bool:
         raise Exception("Null valued found")
 
     # Check all timestamps are of yesterday's date
-    yesterday = datetime.datetime.now() - datetime.timedelta(days=1)
-    yesterday = yesterday.replace(hour=0, minute=0, second=0, microsecond=0)
+    yesterday_time = datetime.datetime.now() - datetime.timedelta(days=1)
+    yesterday_time = yesterday_time.replace(hour=0, minute=0, second=0, microsecond=0)
 
-    timestamps = df["timestamp"].tolist()
-    for timestamp in timestamps:
+    timestamps_from_df = df["timestamp"].tolist()
+    for timestamp in timestamps_from_df:
         if datetime.datetime.strptime(timestamp, "%Y-%m-%d") < yesterday:
-            raise Exception("At least one of the returned songs does not from"
+            raise Exception("At least one of the returned songs does not come from"
                             "the last 24 hours")
 
     return True
