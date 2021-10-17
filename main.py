@@ -9,7 +9,7 @@ import sqlite3
 
 DATABASE_LOCATION = "sqlite:///my_played_tracks.sqlite"
 USER_ID = "creedsonchris"
-TOKEN = "BQBpgtk3fx-DaNoDT4uSCDJKJ7k5TVsP8OMT9_5Q3LJc-ppNT54u5Ua_U7ffR2I8wb_JgWWL1OEKWaWkNFCIdlAUZ1LW_frG_XSdx1pJzI9UNZigiNJlZINLateeaFCPX24fgYMbBXFfOOL7_JY3"
+TOKEN = "BQBiR6Ki-O0QPCPSx-MuLEeC2DBwXkC1nWPRXQSUM6A64a5I7b7dT0yaKHVlraIaLCZZZVz39CKp9pk4TTU2memfNZq0nyWA3WurYKhBV6AkQNakcBfav3uh37Vd9q8KxLVy9zYRDMS6lzZvnXXd"
 
 
 def check_if_valid_data(df: pd.DataFrame) -> bool:
@@ -34,7 +34,7 @@ def check_if_valid_data(df: pd.DataFrame) -> bool:
 
     timestamps = df["timestamp"].tolist()
     for timestamp in timestamps:
-        if datetime.datetime.strptime(timestamp, "%Y-%m-%d") != yesterday:
+        if datetime.datetime.strptime(timestamp, "%Y-%m-%d") < yesterday:
             raise Exception("At least one of the returned songs does not from"
                             "the last 24 hours")
 
