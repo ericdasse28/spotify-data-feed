@@ -8,6 +8,7 @@ class TestExtract:
     yesterday = today - datetime.timedelta(days=1)
 
     def test_data_validity(self):
+        """Test the validity of the retrieved songs data"""
         songs_df = script.Extract.retrieve_songs()
 
         # Is the result a Pandas DataFrame?
@@ -19,6 +20,10 @@ class TestExtract:
             # Test that there aren't any missings values
             assert songs_df.is_null().values.any()
 
+    # TODO: Test the validity of the timestamp of songs retrieved within a given time period
+    def test_retrieve_songs(self):
+
+
     def test_retrieve_yesterday_songs(self):
         """Verify the timestamp is correct when songs from yesterday to now are retrieved"""
 
@@ -26,4 +31,3 @@ class TestExtract:
         for timestamp in songs_df["timestamp"]:
             assert datetime.datetime.strptime(timestamp, "%Y-%m-%d") < self.yesterday
 
-    # TODO: Test the validity of the timestamp of songs retrieved within a given time period
