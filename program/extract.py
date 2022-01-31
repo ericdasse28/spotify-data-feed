@@ -54,7 +54,7 @@ class Extract:
 
         return pd.DataFrame(song_dict)
 
-    def retrieve_yesterday_songs(self):
+    def retrieve_yesterday_songs(self) -> pd.DataFrame:
         """Retrieve songs listened to since yesterday"""
 
         return self.retrieve_songs(days=1)
