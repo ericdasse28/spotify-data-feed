@@ -19,7 +19,7 @@ class Extract:
         if reference_date == "now":
             reference_date_object = self.today
         else:
-            reference_date_split = reference_date.split("/")
+            reference_date_split = list(map(int, reference_date.split("/")))
             reference_date_object = datetime.datetime(reference_date_split[2],
                                                       reference_date_split[1],
                                                       reference_date_split[0])
