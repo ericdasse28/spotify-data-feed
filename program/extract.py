@@ -6,7 +6,7 @@ from dateutil.parser import parse
 
 class Extract:
 
-    TOKEN = ""
+    TOKEN = ""  # TODO: Retrieve token from Spotify API
     headers = {
         "Accept": "application/json",
         "Content-Type": "application/json",
@@ -15,7 +15,7 @@ class Extract:
     today = datetime.datetime.now()
 
     def retrieve_songs(self, reference_date="now", days=30) -> pd.DataFrame:
-        """Retrieve songs that were listened on Spotify prior to a specific time"""
+        """Retrieve songs that were listened on Spotify prior to a specific time within a time range"""
         if reference_date == "now":
             reference_date_object = self.today
         else:
@@ -24,7 +24,7 @@ class Extract:
                                                       reference_date_split[1],
                                                       reference_date_split[0])
 
-        past_date = reference_date_object - datetime.timedelta(days=1)
+        past_date = reference_date_object - datetime.timedelta(days=days)
         past_date_timestamp_ms = int(past_date.timestamp()) * 1000
 
         # Request to Spotify
