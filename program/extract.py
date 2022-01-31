@@ -55,8 +55,6 @@ class Extract:
         return pd.DataFrame(song_dict)
 
     def retrieve_yesterday_songs(self):
-        yesterday = self.today - datetime.timedelta(days=1)
-        yesterday_unix_timestamp_ms = int(yesterday.timestamp()) * 1000
+        """Retrieve songs listened to since yesterday"""
 
-        # Request to Spotify API
-        r = requests.get("https://api.spotify.com/v1/me/player/recently_played")
+        return self.retrieve_songs(days=1)
