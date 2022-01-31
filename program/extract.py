@@ -6,7 +6,7 @@ from dateutil.parser import parse
 
 class Extract:
 
-    TOKEN = "BQABeZW8OAQ2nL6psqo4XTf_oXUKr1KKsqU-1hlLeB6siKc_6M0BJhB8LpyAPY3oAo4WCKeMZ581fZR_jP_EZc9DKW7kZF7hxf7Snc95q2yS9sKEHtIDcWfCoc99Hdky7inSK4YpEdXxyBoIfs-S"
+    TOKEN = "BQCiEwAcCRYnrr99Lutm0OUgFl3ddsv1kJjbKGvM-yepamDULv5qd7gHnyfmnEYbm2VjH6DA0eaFlY5bTQ1sm4OnI48NxTP35_zOep6lNzUwEj4PDJADGI8BIjTaSMVBXqHf_BNmgT0ZBbV95SS5"
     headers = {
         "Accept": "application/json",
         "Content-Type": "application/json",
