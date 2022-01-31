@@ -24,8 +24,8 @@ class TestExtract:
     def test_retrieve_songs_timestamp(self):
         """Test the validity of the timestamp of songs retrieved within a given time period"""
         songs_df = self.extractor.retrieve_songs(reference_date="30/11/2022", days=30)
-        start_date = datetime.datetime(2022, 11, 31)
-        past_date = start_date - datetime.timedelta(days=30)
+        reference_date_object = datetime.datetime(2022, 11, 31)
+        past_date = reference_date_object - datetime.timedelta(days=30)
         for timestamp in songs_df["timestamp"]:
             assert datetime.datetime.strptime(timestamp, "%Y-%m-%d") < past_date
 
