@@ -6,7 +6,7 @@ from dateutil.parser import parse
 
 class Extract:
 
-    TOKEN = ""  # TODO: Retrieve token from Spotify API
+    TOKEN = "BQABeZW8OAQ2nL6psqo4XTf_oXUKr1KKsqU-1hlLeB6siKc_6M0BJhB8LpyAPY3oAo4WCKeMZ581fZR_jP_EZc9DKW7kZF7hxf7Snc95q2yS9sKEHtIDcWfCoc99Hdky7inSK4YpEdXxyBoIfs-S"
     headers = {
         "Accept": "application/json",
         "Content-Type": "application/json",
@@ -29,8 +29,8 @@ class Extract:
 
         # Request to Spotify
         r = requests\
-            .get("https://api.spotify.com/v1/me/player/recently-played?after={time}")\
-            .format(time=past_date_timestamp_ms, headers=self.headers)
+            .get("https://api.spotify.com/v1/me/player/recently-played?after={time}"
+                 .format(time=past_date_timestamp_ms), headers=self.headers)
 
         data = r.json()
 
