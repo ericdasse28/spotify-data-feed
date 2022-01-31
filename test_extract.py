@@ -20,7 +20,7 @@ class TestExtract:
             # Test that there aren't any missings values
             assert songs_df.is_null().values.any()
 
-    def test_retrieve_songs(self):
+    def test_retrieve_songs_timestamp(self):
         """Test the validity of the timestamp of songs retrieved within a given time period"""
         songs_df = script.Extract.retrieve_songs(start_date="30/11/2022", days=30)
         start_date = datetime.datetime(2022, 11, 31)
@@ -28,7 +28,7 @@ class TestExtract:
         for timestamp in songs_df["timestamp"]:
             assert datetime.datetime.strptime(timestamp, "%Y-%m-%d") < past_date
 
-    def test_retrieve_yesterday_songs(self):
+    def test_retrieve_yesterday_songs_timestamp(self):
         """Verify the timestamp is correct when songs from yesterday to now are retrieved"""
 
         songs_df = script.Extract.retrieve_yesterday_songs()
