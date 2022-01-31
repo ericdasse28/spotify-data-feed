@@ -19,7 +19,7 @@ class TestExtract:
             # If not, test that the values in the 'played_at' column are unique (primary key check)
             assert pd.Series(songs_df['played_at']).is_unique
             # Test that there aren't any missings values
-            assert songs_df.is_null().values.any()
+            assert songs_df.isnull().values.any()
 
     def test_retrieve_songs_timestamp(self):
         """Test the validity of the timestamp of songs retrieved within a given time period"""
