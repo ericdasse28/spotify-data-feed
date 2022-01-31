@@ -9,7 +9,8 @@ class TestExtract:
 
     def test_data_validity(self):
         """Test the validity of the retrieved songs data"""
-        songs_df = script.Extract.retrieve_songs()
+        extractor = script.Extract()
+        songs_df = extractor.retrieve_songs()
 
         # Is the result a Pandas DataFrame?
         assert isinstance(songs_df, pd.DataFrame)
