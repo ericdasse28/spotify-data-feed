@@ -1,12 +1,21 @@
 import program.extract as script
 import datetime
 import pandas as pd
+import pytest
 
 
 class TestExtract:
     today = datetime.datetime.now()
     yesterday = today - datetime.timedelta(days=1)
     extractor = script.Extract()
+
+    @pytest.fixture
+    def yesterday(self):
+        return datetime.datetime.now() - datetime.timedelta(days=1)
+
+    @pytest.fixture
+    def extractor(self):
+        return script.Extract()
 
     def test_data_validity(self):
         """Test the validity of the retrieved songs data"""
