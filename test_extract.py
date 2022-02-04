@@ -10,12 +10,11 @@ class TestExtract:
     extractor = script.Extract()
 
     @pytest.fixture
-    def yesterday(self):
-        return datetime.datetime.now() - datetime.timedelta(days=1)
-
-    @pytest.fixture
     def extractor(self):
         return script.Extract()
+
+    def setup(self):
+        self.yesterday = datetime.datetime.now() - datetime.timedelta(days=1)
 
     def test_data_validity(self, extractor):
         """Test the validity of the retrieved songs data"""
