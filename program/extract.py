@@ -17,7 +17,7 @@ class Extract:
         }
         self.today = datetime.datetime.now()
 
-    def retrieve_songs(self, reference_date="now", days=30) -> pd.DataFrame:
+    def retrieve_songs(self, reference_date: str = "now", days: int = 30) -> pd.DataFrame:
         """Retrieve songs that were listened on Spotify prior to a specific time within a time range"""
         if reference_date == "now":
             reference_date_object = self.today
