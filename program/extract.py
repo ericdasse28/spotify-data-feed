@@ -1,12 +1,13 @@
 import datetime
 import pandas as pd
 import requests
-from dateutil.parser import parse
+import os
 
 
 class Extract:
 
-    TOKEN = "BQCiEwAcCRYnrr99Lutm0OUgFl3ddsv1kJjbKGvM-yepamDULv5qd7gHnyfmnEYbm2VjH6DA0eaFlY5bTQ1sm4OnI48NxTP35_zOep6lNzUwEj4PDJADGI8BIjTaSMVBXqHf_BNmgT0ZBbV95SS5"
+    TOKEN = os.environ.get("SPOTIFY_API_KEY")
+
     headers = {
         "Accept": "application/json",
         "Content-Type": "application/json",
