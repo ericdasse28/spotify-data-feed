@@ -11,9 +11,9 @@ class TestExtract:
         self.yesterday = self.today - datetime.timedelta(days=1)
         self.extractor = script.Extract()
 
-    def test_data_validity(self, extractor):
+    def test_data_validity(self):
         """Test the validity of the retrieved songs data"""
-        songs_df = extractor().retrieve_songs()
+        songs_df = self.extractor.retrieve_songs()
 
         # Is the result a Pandas DataFrame?
         assert isinstance(songs_df, pd.DataFrame)
