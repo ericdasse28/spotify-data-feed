@@ -6,14 +6,16 @@ import os
 
 class Extract:
 
-    TOKEN = os.environ.get("SPOTIFY_API_KEY")
+    def __init__(self):
 
-    headers = {
-        "Accept": "application/json",
-        "Content-Type": "application/json",
-        "Authorization": f"Bearer {TOKEN}"
-    }
-    today = datetime.datetime.now()
+        token = os.environ.get("SPOTIFY_API_KEY")
+
+        self.headers = {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {token}"
+        }
+        self.today = datetime.datetime.now()
 
     def retrieve_songs(self, reference_date="now", days=30) -> pd.DataFrame:
         """Retrieve songs that were listened on Spotify prior to a specific time within a time range"""
