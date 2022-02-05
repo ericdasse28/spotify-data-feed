@@ -5,16 +5,11 @@ import pytest
 
 
 class TestExtract:
-    today = datetime.datetime.now()
-    # yesterday = today - datetime.timedelta(days=1)
-    # extractor = script.Extract()
 
-    @pytest.fixture
-    def extractor(self):
-        return script.Extract()
-
-    def setup(self):
-        self.yesterday = datetime.datetime.now() - datetime.timedelta(days=1)
+    def setup_method(self):
+        self.today = datetime.datetime.now()
+        self.yesterday = self.today - datetime.timedelta(days=1)
+        self.extractor = script.Extract()
 
     def test_data_validity(self, extractor):
         """Test the validity of the retrieved songs data"""
