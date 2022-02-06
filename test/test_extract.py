@@ -32,7 +32,7 @@ class TestExtract:
         reference_date_object = datetime.datetime(2022, 1, 31)
         past_date = reference_date_object - datetime.timedelta(days=30)
         for timestamp in songs_df["timestamp"]:
-            assert datetime.datetime.strptime(timestamp, "%Y-%m-%d") < past_date
+            assert datetime.datetime.strptime(timestamp, "%Y-%m-%d") >= past_date
 
     @vcr.use_cassette('cassettes/spotify-data-yesterday.yaml', record_mode='once')
     def test_retrieve_yesterday_songs_timestamp(self):
@@ -40,4 +40,4 @@ class TestExtract:
 
         songs_df = self.extractor.retrieve_yesterday_songs()
         for timestamp in songs_df["timestamp"]:
-            assert datetime.datetime.strptime(timestamp, "%Y-%m-%d") < self.yesterday
+            assert datetime.datetime.strptime(timestamp, "%Y-%m-%d") >= self.yesterday
