@@ -27,7 +27,10 @@ class Extract:
                                                       reference_date_split[1],
                                                       reference_date_split[0])
 
-        past_date = reference_date_object - datetime.timedelta(days=days)
+        # The Spotify API will render every song AFTER a specified timestamp
+        # For that reason, we should request the songs with the timestamp of the day
+        # before the target date, hence days+1 below
+        past_date = reference_date_object - datetime.timedelta(days=days+1)
         past_date_timestamp_ms = int(past_date.timestamp()) * 1000
 
         # Request to Spotify
