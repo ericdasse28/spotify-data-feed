@@ -1,7 +1,6 @@
 import program.extract as script
 import datetime
 import pandas as pd
-import pytest
 
 
 class TestExtract:
