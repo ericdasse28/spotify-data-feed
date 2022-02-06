@@ -11,7 +11,7 @@ class TestExtract:
         self.yesterday = self.today - datetime.timedelta(days=1)
         self.extractor = script.Extract()
 
-    @vcr.use_cassette('cassettes/spotify-data.yaml')
+    @vcr.use_cassette('cassettes/spotify-data.yaml', record_mode='once')
     def test_data_validity(self):
         """Test the validity of the retrieved songs data"""
         songs_df = self.extractor.retrieve_songs()
@@ -25,7 +25,7 @@ class TestExtract:
             # Test that there aren't any missings values
             assert not songs_df.isnull().values.any()
 
-    @vcr.use_cassette('cassettes/spotify-data-31-01-2022-30.yaml')
+    @vcr.use_cassette('cassettes/spotify-data-31-01-2022-30.yaml', record_mode='once')
     def test_retrieve_songs_timestamp(self):
         """Test the validity of the timestamp of songs retrieved within a given time period"""
         songs_df = self.extractor.retrieve_songs(reference_date="30/11/2022", days=30)
@@ -34,7 +34,7 @@ class TestExtract:
         for timestamp in songs_df["timestamp"]:
             assert datetime.datetime.strptime(timestamp, "%Y-%m-%d") < past_date
 
-    @vcr.use_cassette('cassettes/spotify-data-yesterday.yaml')
+    @vcr.use_cassette('cassettes/spotify-data-yesterday.yaml', record_mode='once')
     def test_retrieve_yesterday_songs_timestamp(self):
         """Verify the timestamp is correct when songs from yesterday to now are retrieved"""
 
