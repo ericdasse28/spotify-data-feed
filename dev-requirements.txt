@@ -5,4 +5,4 @@ pytest
 black
 flake8
 flake8-bugbear
-vcr
+pytest-vcr == 1.0.2
