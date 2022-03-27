@@ -5,7 +5,6 @@ import os
 
 
 class Extract:
-
     def __init__(self):
 
         token = os.environ.get("SPOTIFY_API_KEY")
@@ -13,30 +12,38 @@ class Extract:
         self.headers = {
             "Accept": "application/json",
             "Content-Type": "application/json",
-            "Authorization": f"Bearer {token}"
+            "Authorization": f"Bearer {token}",
         }
         self.today = datetime.datetime.now()
 
-    def retrieve_songs(self, reference_date: str = "now", days: int = 30) -> pd.DataFrame:
-        """Retrieve songs that were listened on Spotify prior to a specific time within a time range"""
+    def retrieve_songs(
+        self, reference_date: str = "now", days: int = 30
+    ) -> pd.DataFrame:
+        """Retrieve songs that were listened on Spotify prior to a specific
+        time within a time range"""
+
         if reference_date == "now":
             reference_date_object = self.today
         else:
             reference_date_split = [int(x) for x in reference_date.split("/")]
-            reference_date_object = datetime.datetime(reference_date_split[2],
-                                                      reference_date_split[1],
-                                                      reference_date_split[0])
+            reference_date_object = datetime.datetime(
+                reference_date_split[2],
+                reference_date_split[1],
+                reference_date_split[0],
+            )
 
         # The Spotify API will render every song AFTER a specified timestamp
-        # For that reason, we should request the songs with the timestamp of the day
-        # before the target date, hence days+1 below
-        past_date = reference_date_object - datetime.timedelta(days=days+1)
+        # For that reason, we should request the songs with the timestamp of
+        # the day before the target date, hence days+1 below
+        past_date = reference_date_object - datetime.timedelta(days=days + 1)
         past_date_timestamp_ms = int(past_date.timestamp()) * 1000
+        request_url = f"https://api.spotify.com/v1/me/player/recently-played?after={past_date_timestamp_ms}"
 
         # Request to Spotify
-        r = requests\
-            .get("https://api.spotify.com/v1/me/player/recently-played?after={time}"
-                 .format(time=past_date_timestamp_ms), headers=self.headers)
+        r = requests.get(
+            request_url,
+            headers=self.headers,
+        )
 
         data = r.json()
 
@@ -55,7 +62,7 @@ class Extract:
             "song_name": song_names,
             "artist_name": artist_names,
             "played_at": played_at_list,
-            "timestamp": timestamps
+            "timestamp": timestamps,
         }
 
         return pd.DataFrame(song_dict)
