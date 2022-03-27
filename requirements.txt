@@ -12,6 +12,8 @@ charset-normalizer==2.0.12
     # via requests
 django==4.0.3
     # via -r requirements.in
+greenlet==1.1.2
+    # via sqlalchemy
 idna==3.3
     # via requests
 numpy==1.22.3
@@ -26,6 +28,8 @@ requests==2.27.1
     # via -r requirements.in
 six==1.16.0
     # via python-dateutil
+sqlalchemy==1.4.32
+    # via -r requirements.in
 sqlparse==0.4.2
     # via django
 urllib3==1.26.9

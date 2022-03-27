@@ -1,3 +1,4 @@
 Django >= 3.2.12
 pandas == 1.4.1
 requests == 2.27.1
+sqlalchemy == 1.4.32
