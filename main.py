@@ -1,15 +1,14 @@
 import sqlalchemy
 import pandas as pd
-from sqlalchemy.orm import sessionmaker
 import requests
-import json
-from datetime import datetime
 import datetime
 import sqlite3
 
-DATABASE_LOCATION = "sqlite:///my_played_tracks.sqlite"
-USER_ID = "creedsonchris"
-TOKEN = "BQBiR6Ki-O0QPCPSx-MuLEeC2DBwXkC1nWPRXQSUM6A64a5I7b7dT0yaKHVlraIaLCZZZVz39CKp9pk4TTU2memfNZq0nyWA3WurYKhBV6AkQNakcBfav3uh37Vd9q8KxLVy9zYRDMS6lzZvnXXd"
+import os
+
+DATABASE_LOCATION = os.environ.get("DATABASE_LOCATION")
+USER_ID = os.environ.get("USER_ID")
+TOKEN = os.environ.get("TOKEN")
 
 
 def check_if_valid_data(df: pd.DataFrame) -> bool:
@@ -19,7 +18,7 @@ def check_if_valid_data(df: pd.DataFrame) -> bool:
         return False
 
     # Primary check
-    if pd.Series(df['played_at']).is_unique:
+    if pd.Series(df["played_at"]).is_unique:
         pass
     else:
         raise Exception("Primary Key Check is violated")
@@ -35,8 +34,10 @@ def check_if_valid_data(df: pd.DataFrame) -> bool:
     timestamps_from_df = df["timestamp"].tolist()
     for timestamp in timestamps_from_df:
         if datetime.datetime.strptime(timestamp, "%Y-%m-%d") < yesterday:
-            raise Exception("At least one of the returned songs does not come from"
-                            "the last 24 hours")
+            raise Exception(
+                "At least one of the returned songs does not come from"
+                "the last 24 hours"
+            )
 
     return True
 
@@ -46,16 +47,19 @@ if __name__ == "__main__":
     headers = {
         "Accept": "application/json",
         "Content-Type": "application/json",
-        "Authorization": f"Bearer {TOKEN}"
+        "Authorization": f"Bearer {TOKEN}",
     }
 
     today = datetime.datetime.now()
     yesterday = today - datetime.timedelta(days=1)
     yesterday_unix_timestamp = int(yesterday.timestamp()) * 1000
 
-    r = requests\
-        .get("https://api.spotify.com/v1/me/player/recently-played?after={time}"
-             .format(time=yesterday_unix_timestamp), headers=headers)
+    r = requests.get(
+        "https://api.spotify.com/v1/me/player/recently-played?after={time}".format(
+            time=yesterday_unix_timestamp
+        ),
+        headers=headers,
+    )
 
     data = r.json()
 
@@ -74,7 +78,7 @@ if __name__ == "__main__":
         "song_name": song_names,
         "artist_name": artist_names,
         "played_at": played_at_list,
-        "timestamp": timestamps
+        "timestamp": timestamps,
     }
 
     song_df = pd.DataFrame(song_dict)
@@ -87,7 +91,7 @@ if __name__ == "__main__":
 
     # Load
     engine = sqlalchemy.create_engine(DATABASE_LOCATION)
-    conn = sqlite3.connect('my_played_at_tracks.sqlite')
+    conn = sqlite3.connect("my_played_at_tracks.sqlite")
     cursor = conn.cursor()
 
     sql_query = """
@@ -104,9 +108,8 @@ if __name__ == "__main__":
     print("Opened database successfully")
 
     try:
-        song_df.to_sql("my_played_tracks", engine, index=False,
-                       if_exists='append')
-    except:
+        song_df.to_sql("my_played_tracks", engine, index=False, if_exists="append")
+    except Exception:
         print("Data already exists in the database")
 
     conn.close()
