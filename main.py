@@ -1,10 +1,13 @@
-import sqlalchemy
+import datetime
+import dotenv
 import pandas as pd
 import requests
-import datetime
+import sqlalchemy
 import sqlite3
 
 import os
+
+dotenv.load_dotenv()
 
 DATABASE_LOCATION = os.environ.get("DATABASE_LOCATION")
 USER_ID = os.environ.get("USER_ID")
