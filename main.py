@@ -4,9 +4,11 @@ import requests
 import datetime
 import sqlite3
 
-DATABASE_LOCATION = "sqlite:///my_played_tracks.sqlite"
-USER_ID = "creedsonchris"
-TOKEN = "BQBiR6Ki-O0QPCPSx-MuLEeC2DBwXkC1nWPRXQSUM6A64a5I7b7dT0yaKHVlraIaLCZZZVz39CKp9pk4TTU2memfNZq0nyWA3WurYKhBV6AkQNakcBfav3uh37Vd9q8KxLVy9zYRDMS6lzZvnXXd"
+import os
+
+DATABASE_LOCATION = os.environ.get("DATABASE_LOCATION")
+USER_ID = os.environ.get("USER_ID")
+TOKEN = os.environ.get("TOKEN")
 
 
 def check_if_valid_data(df: pd.DataFrame) -> bool:
