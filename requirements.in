@@ -1,5 +1,6 @@
-Django >= 3.2.12
-pandas == 1.4.1
-python-dotenv == 0.20.0
-requests == 2.27.1
-sqlalchemy == 1.4.32
+Django >= 4.0.4
+psycopg2 >= 2.9.3
+# pandas == 1.4.1
+# python-dotenv == 0.20.0
+# requests == 2.27.1
+# sqlalchemy == 1.4.32
