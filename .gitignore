@@ -104,6 +104,7 @@ celerybeat.pid
 # Environments
 .env
 .venv
+.spotify-env
 env/
 venv/
 ENV/
