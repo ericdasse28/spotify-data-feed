@@ -76,8 +76,8 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
         "NAME": "spotify_feed",
-        "USER": "postgres",
-        "PASSWORD": "1234",
+        "USER": "spotify",
+        "PASSWORD": "spotify",
         "HOST": "127.0.0.1",
         "PORT": "5432",
     }
