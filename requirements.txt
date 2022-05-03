@@ -10,5 +10,7 @@ django==4.0.4
     # via -r requirements.in
 psycopg2==2.9.3
     # via -r requirements.in
+python-dotenv==0.20.0
+    # via -r requirements.in
 sqlparse==0.4.2
     # via django
