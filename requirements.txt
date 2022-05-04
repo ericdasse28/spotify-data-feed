@@ -6,11 +6,21 @@
 #
 asgiref==3.5.0
     # via django
+certifi==2021.10.8
+    # via requests
+charset-normalizer==2.0.12
+    # via requests
 django==4.0.4
     # via -r requirements.in
+idna==3.3
+    # via requests
 psycopg2==2.9.3
     # via -r requirements.in
 python-dotenv==0.20.0
     # via -r requirements.in
+requests==2.27.1
+    # via -r requirements.in
 sqlparse==0.4.2
     # via django
+urllib3==1.26.9
+    # via requests
