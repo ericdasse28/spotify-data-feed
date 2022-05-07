@@ -1,4 +1,4 @@
-from spotify_feed.extractor.tracks import get_recent_tracks
+from spotify_feed.extractor.tracks import get_recent_tracks, request_previous_tracks
 
 
 def test_request_recently_played_tracks_before_a_date():
@@ -9,3 +9,10 @@ def test_request_recently_played_tracks_before_a_date():
     ), "There was an error while retrieving played tracks"
     assert data["limit"] == 10
     assert len(data["items"]) == 10
+
+
+def test_request_use_cache():
+    _ = request_previous_tracks(before="2022-05-03", limit=10)
+    response_2 = request_previous_tracks(before="2022-05-03", limit=10)
+
+    assert response_2.from_cache

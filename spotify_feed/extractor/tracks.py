@@ -3,8 +3,14 @@ import os
 
 import dotenv
 import requests
+import requests_cache
 
 dotenv.load_dotenv()
+requests_cache.install_cache(
+    "datafeed_cache",
+    backend="redis",
+    expire_after=180,
+)
 
 
 def get_recent_tracks(before=None, limit=10):
