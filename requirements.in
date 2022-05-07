@@ -1,6 +1,7 @@
 Django >= 4.0.4
 psycopg2 >= 2.9.3
 python-dotenv >= 0.20.0
+redis >= 4.2.2
 requests >= 2.27.1
 requests-cache == 0.9.4
 # pandas == 1.4.1
