@@ -8,6 +8,14 @@ dotenv.load_dotenv()
 
 
 def get_recent_tracks(before=None, limit=10):
+    response = request_previous_tracks(before, limit)
+
+    data = response.json()
+
+    return data
+
+
+def request_previous_tracks(before, limit):
     token = os.environ.get("TOKEN")
     endpoint = os.environ.get("ENDPOINT")
     headers = {
@@ -21,11 +29,9 @@ def get_recent_tracks(before=None, limit=10):
         date = datetime.datetime.now()
     unix_timestamp = int(date.timestamp()) * 1000
 
-    r = requests.get(
+    response = requests.get(
         url=f"{endpoint}?limit={limit}&before={unix_timestamp}",
         headers=headers,
     )
 
-    data = r.json()
-
-    return data
+    return response
