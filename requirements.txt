@@ -4,8 +4,16 @@
 #
 #    pip-compile requirements.in
 #
+appdirs==1.4.4
+    # via requests-cache
 asgiref==3.5.0
     # via django
+attrs==21.4.0
+    # via
+    #   cattrs
+    #   requests-cache
+cattrs==1.10.0
+    # via requests-cache
 certifi==2021.10.8
     # via requests
 charset-normalizer==2.0.12
@@ -19,8 +27,18 @@ psycopg2==2.9.3
 python-dotenv==0.20.0
     # via -r requirements.in
 requests==2.27.1
+    # via
+    #   -r requirements.in
+    #   requests-cache
+requests-cache==0.9.4
     # via -r requirements.in
+six==1.16.0
+    # via url-normalize
 sqlparse==0.4.2
     # via django
+url-normalize==1.4.3
+    # via requests-cache
 urllib3==1.26.9
-    # via requests
+    # via
+    #   requests
+    #   requests-cache

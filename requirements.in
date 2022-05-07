@@ -2,6 +2,7 @@ Django >= 4.0.4
 psycopg2 >= 2.9.3
 python-dotenv >= 0.20.0
 requests >= 2.27.1
+requests-cache == 0.9.4
 # pandas == 1.4.1
 # python-dotenv == 0.20.0
 # sqlalchemy == 1.4.32
