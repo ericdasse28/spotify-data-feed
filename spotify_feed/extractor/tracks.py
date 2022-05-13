@@ -14,14 +14,14 @@ requests_cache.install_cache(
 
 
 def get_recent_tracks(before=None, limit=10):
-    response = request_previous_tracks(before, limit)
+    response = request_tracks_prior_to(before, limit)
 
     data = response.json()
 
     return data
 
 
-def request_previous_tracks(before, limit):
+def request_tracks_prior_to(before, limit):
     token = os.environ.get("TOKEN")
     endpoint = os.environ.get("ENDPOINT")
     headers = {
