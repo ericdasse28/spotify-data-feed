@@ -1,11 +1,9 @@
 import datetime
-import os
 
-import dotenv
 import requests
 import requests_cache
+from spotify_feed.extractor import credentials
 
-dotenv.load_dotenv()
 requests_cache.install_cache(
     "datafeed_cache",
     backend="redis",
@@ -43,13 +41,6 @@ def get_recent_tracks(before=None, after=None, limit=10):
 
 
 def request_tracks_prior_to(before, limit):
-    token = os.environ.get("TOKEN")
-    endpoint = os.environ.get("ENDPOINT")
-    headers = {
-        "Accept": "application/json",
-        "Content-Type": "application/json",
-        "Authorization": f"Bearer {token}",
-    }
     if before:
         date = datetime.datetime.strptime(before, "%Y-%m-%d")
     else:
@@ -57,21 +48,14 @@ def request_tracks_prior_to(before, limit):
     unix_timestamp = int(date.timestamp()) * 1000
 
     response = requests.get(
-        url=f"{endpoint}?limit={limit}&before={unix_timestamp}",
-        headers=headers,
+        url=f"{credentials.SPOTIFY_ENDPOINT}?limit={limit}&before={unix_timestamp}",
+        headers=credentials.SPOTIFY_HEADERS,
     )
 
     return response
 
 
 def request_tracks_after(after, limit):
-    token = os.environ.get("TOKEN")
-    endpoint = os.environ.get("ENDPOINT")
-    headers = {
-        "Accept": "application/json",
-        "Content-Type": "application/json",
-        "Authorization": f"Bearer {token}",
-    }
     if after:
         date = datetime.datetime.strptime(after, "%Y-%m-%d")
     else:
@@ -79,8 +63,8 @@ def request_tracks_after(after, limit):
     unix_timestamp = int(date.timestamp()) * 1000
 
     response = requests.get(
-        url=f"{endpoint}?limit={limit}&after={unix_timestamp}",
-        headers=headers,
+        url=f"{credentials.SPOTIFY_ENDPOINT}?limit={limit}&after={unix_timestamp}",
+        headers=credentials.SPOTIFY_HEADERS,
     )
 
     return response
