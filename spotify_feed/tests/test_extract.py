@@ -1,6 +1,10 @@
 import datetime
 
-from spotify_feed.extractor.tracks import get_recent_tracks, request_tracks_prior_to
+from spotify_feed.extractor.tracks import (
+    get_recent_tracks,
+    request_tracks_after,
+    request_tracks_prior_to,
+)
 
 
 def test_request_recently_played_tracks_before_a_date():
@@ -38,5 +42,10 @@ def test_request_recently_played_tracks_after_a_date():
 def test_request_use_cache():
     _ = request_tracks_prior_to(before="2022-05-03", limit=10)
     response_2 = request_tracks_prior_to(before="2022-05-03", limit=10)
+
+    assert response_2.from_cache
+
+    _ = request_tracks_after(after="2022-05-03", limit=10)
+    response_2 = request_tracks_after(after="2022-05-03", limit=10)
 
     assert response_2.from_cache
