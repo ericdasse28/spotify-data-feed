@@ -40,4 +40,3 @@ def test_request_use_cache():
     response_2 = request_tracks_prior_to(before="2022-05-03", limit=10)
 
     assert response_2.from_cache
-
