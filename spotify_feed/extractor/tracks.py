@@ -13,7 +13,7 @@ requests_cache.install_cache(
 
 def get_recent_tracks(before=None, after=None, limit=10):
     """
-    Gets the most recently listened tracks of the user from Spotify API.
+    Gets the most recently played tracks of the current user from the Spotify API.
 
     Parameters
     ----------
@@ -26,6 +26,11 @@ def get_recent_tracks(before=None, after=None, limit=10):
         (Default, None)
     limit: int, optional
         Maximum number of tracks to recover (default, 10)
+
+    Returns
+    -------
+    data: dict
+        Dictionary containing raw JSON data about the most recently played tracks.
     """
     if before and after:
         raise AssertionError("You shouldn't define both before and after parameters")
