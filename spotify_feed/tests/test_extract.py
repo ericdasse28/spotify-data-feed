@@ -19,7 +19,7 @@ def test_request_recently_played_tracks_before_a_date():
 
     data_items = data["items"]
     assert data["limit"] == 10
-    assert len(data_items) == 10
+    assert len(data_items) <= 10
     for data_item in data_items:
         played_at_day = data_item["played_at"][:10]
         assert (
@@ -39,7 +39,7 @@ def test_request_recently_played_tracks_after_a_date():
 
     data_items = data["items"]
     assert data["limit"] == 10
-    assert len(data_items) == 10
+    assert len(data_items) <= 10
     for data_item in data_items:
         played_at_day = data_item["played_at"][:10]
         assert (
