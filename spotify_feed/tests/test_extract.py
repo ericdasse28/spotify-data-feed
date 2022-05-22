@@ -1,5 +1,6 @@
 import datetime
 
+import pytest
 from spotify_feed.extractor.tracks import (
     get_recent_tracks,
     request_tracks_after,
@@ -59,3 +60,9 @@ def test_request_use_cache():
     response_2 = request_tracks_after(after=context.reference_day, limit=10)
 
     assert response_2.from_cache
+
+
+def test_before_and_after_cannot_simultaneously_be_defined():
+    context = Context()
+    with pytest.raises(ValueError):
+        get_recent_tracks(before=context.reference_day, after=context.reference_day)

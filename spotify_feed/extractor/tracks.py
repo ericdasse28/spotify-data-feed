@@ -42,7 +42,7 @@ def get_recent_tracks(*, before=None, after=None, limit=10):
         Dictionary containing raw JSON data about the most recently played tracks.
     """
     if before and after:
-        raise AssertionError("You shouldn't define both before and after parameters")
+        raise ValueError("You shouldn't define both before and after parameters")
 
     if after:
         response = request_tracks_after(after, limit=limit)
