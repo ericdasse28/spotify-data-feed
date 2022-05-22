@@ -20,7 +20,7 @@ class Track:
     timestamp: str
 
 
-def get_recent_tracks(before=None, after=None, limit=10):
+def get_recent_tracks(*, before=None, after=None, limit=10):
     """
     Gets the most recently played tracks of the current user from the Spotify API.
 
