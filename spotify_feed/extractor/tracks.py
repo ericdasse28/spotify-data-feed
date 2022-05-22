@@ -82,3 +82,18 @@ def request_tracks_after(after, limit):
     )
 
     return response
+
+
+def transform(data):
+    transformed_tracks = []
+
+    for raw_track in data["items"]:
+        transformed_track = Track(
+            song_name=raw_track["track"]["name"],
+            artist_name=raw_track["track"]["album"]["artists"][0]["name"],
+            played_at=raw_track["played_at"][:10],
+            timestamp=raw_track["played_at"],
+        )
+        transformed_tracks.append(transformed_track)
+
+    return transformed_tracks
