@@ -24,3 +24,15 @@ def test_format_extracted_data(before, after):
         )
         assert transformed_track.played_at == raw_track["played_at"][:10]
         assert transformed_track.timestamp == raw_track["played_at"]
+
+
+@pytest.mark.parametrize("before, after", test_dates)
+def test_timestamps_are_unique(before, after):
+    data = get_recent_tracks(before=before, after=after)
+
+    transformed_tracks = transform(data)
+
+    timestamps = []
+    for transformed_track in transformed_tracks:
+        timestamps.append(transformed_track.timestamp)
+    assert len(set(timestamps)) == len(timestamps)
