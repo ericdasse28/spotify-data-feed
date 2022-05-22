@@ -1,4 +1,5 @@
 import datetime
+from dataclasses import dataclass
 
 import requests
 import requests_cache
@@ -9,6 +10,14 @@ requests_cache.install_cache(
     backend="redis",
     expire_after=180,
 )
+
+
+@dataclass
+class Track:
+    song_name: str
+    artist_name: str
+    played_at: str
+    timestamp: str
 
 
 def get_recent_tracks(before=None, after=None, limit=10):
