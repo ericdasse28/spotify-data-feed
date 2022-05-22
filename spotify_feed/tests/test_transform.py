@@ -1,11 +1,13 @@
+import pytest
 from spotify_feed.extractor.tracks import Track, get_recent_tracks, transform
-from spotify_feed.tests.helpers import Context
+from spotify_feed.tests.helpers import make_test_dates
+
+test_dates = make_test_dates()
 
 
-def test_format_extracted_data():
-    # TODO: Use a parameterized fixture for get_recent_tracks parameters
-    context = Context()
-    data = get_recent_tracks(before=context.reference_day)
+@pytest.mark.parametrize("before, after", test_dates)
+def test_format_extracted_data(before, after):
+    data = get_recent_tracks(before=before, after=after)
 
     transformed_tracks = transform(data)
 
