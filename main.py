@@ -1,10 +1,13 @@
-import sqlalchemy
-import pandas as pd
-import requests
 import datetime
+import os
 import sqlite3
 
-import os
+import dotenv
+import pandas as pd
+import requests
+import sqlalchemy
+
+dotenv.load_dotenv()
 
 DATABASE_LOCATION = os.environ.get("DATABASE_LOCATION")
 USER_ID = os.environ.get("USER_ID")
@@ -18,10 +21,8 @@ def check_if_valid_data(df: pd.DataFrame) -> bool:
         return False
 
     # Primary check
-    if pd.Series(df["played_at"]).is_unique:
-        pass
-    else:
-        raise Exception("Primary Key Check is violated")
+    if not pd.Series(df["played_at"]).is_unique:
+        raise IntregrityError("Primary Key Check is violated")
 
     # Check for nulls
     if df.isnull().values.any():
@@ -62,6 +63,8 @@ if __name__ == "__main__":
     )
 
     data = r.json()
+
+    breakpoint()
 
     song_names = []
     artist_names = []
