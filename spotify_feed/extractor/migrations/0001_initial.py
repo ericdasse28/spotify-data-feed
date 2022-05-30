@@ -7,18 +7,25 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='MyPlayedTracks',
+            name="MyPlayedTracks",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('song_name', models.CharField(max_length=200)),
-                ('artist_name', models.CharField(max_length=200)),
-                ('played_at', models.CharField(max_length=200, unique=True)),
-                ('timestamp', models.CharField(max_length=200)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("song_name", models.CharField(max_length=200)),
+                ("artist_name", models.CharField(max_length=200)),
+                ("played_at", models.CharField(max_length=200, unique=True)),
+                ("timestamp", models.CharField(max_length=200)),
             ],
         ),
     ]
