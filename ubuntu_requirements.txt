@@ -1,0 +1,5 @@
+python-dev
+postgresql
+postgresql-contrib
+libpq-dev
+build-essential
